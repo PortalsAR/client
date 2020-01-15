@@ -47,7 +47,8 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
-        <Viro360Image source={require("./res/dubai.jpg")} />
+        {/* <Viro360Image source={require('./res/amsterdam.jpg')} /> */}
+        <Viro360Image source={{uri: "https://panoimages.s3-us-west-1.amazonaws.com/images/myimage.jpg"}} />
         {/* <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} /> */}
         {/* <ViroBox position={[0, -.5, -1]} scale={[.3, .3, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} /> */}
         <ViroAmbientLight color={"#aaaaaa"} />
