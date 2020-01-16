@@ -31,11 +31,12 @@ var sharedProps = {
 
 // Sets the default scene you want for AR and VR
 var InitialARScene = require('./js/HelloWorldSceneAR.js');
-var InitialVRScene = require('./js/HelloWorldScene');
+// var InitialVRScene = require('./js/HelloWorldScene');
 
 var UNSET = "UNSET";
 var VR_NAVIGATOR_TYPE = "VR";
 var AR_NAVIGATOR_TYPE = "AR";
+var REACT_NATIVE_HOME = "REACT_NATIVE_HOME";
 
 // This determines which type of experience to launch in, or UNSET, if the user should
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
@@ -52,6 +53,7 @@ export default class ViroSample extends Component {
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._getARNavigator = this._getARNavigator.bind(this);
     this._getVRNavigator = this._getVRNavigator.bind(this);
+    this._getReactNativeHome = this._getReactNativeHome.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
     this._exitViro = this._exitViro.bind(this);
   }
@@ -65,6 +67,8 @@ export default class ViroSample extends Component {
       return this._getVRNavigator();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
       return this._getARNavigator();
+    } else if (this.state.navigatorType === REACT_NATIVE_HOME) {
+      return this._getReactNativeHome();
     }
   }
 
@@ -75,7 +79,7 @@ export default class ViroSample extends Component {
         <View style={localStyles.inner} >
 
           <Text style={localStyles.titleText}>
-            Choose your desired experience:
+            Choose 'AR' you FOOL:
           </Text>
 
           <TouchableHighlight style={localStyles.buttons}
@@ -91,6 +95,13 @@ export default class ViroSample extends Component {
 
             <Text style={localStyles.buttonText}>VR</Text>
           </TouchableHighlight>
+
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={this._getExperienceButtonOnPress(REACT_NATIVE_HOME)}
+            underlayColor={'#68a0dd'} >
+            <Text style={localStyles.buttonText}>HOMEPAGE</Text>
+          </TouchableHighlight>
+
         </View>
       </View>
     );
@@ -109,6 +120,16 @@ export default class ViroSample extends Component {
     return (
       <ViroVRSceneNavigator {...this.state.sharedProps}
         initialScene={{scene: InitialVRScene}} onExitViro={this._exitViro}/>
+    );
+  }
+
+  _getReactNativeHome() {
+    return (
+      <View style={localStyles.inner}>
+        <Text style={localStyles.titleText}>
+          WELCOME TO THE HOME PAGE!!!
+        </Text>
+      </View>
     );
   }
 
